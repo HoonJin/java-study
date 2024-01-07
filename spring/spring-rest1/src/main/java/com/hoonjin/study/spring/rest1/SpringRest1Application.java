@@ -4,7 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class Rest1Application {
+public class SpringRest1Application {
 
     public static void main(String[] args) {
 //        ApplicationContext ac = SpringApplication.run(Rest1Application.class, args);
@@ -13,6 +13,6 @@ public class Rest1Application {
 //        for (String bean : beanDefinitionNames) {
 //            System.out.println("bean = " + bean);
 //        }
-        SpringApplication.run(Rest1Application.class, args);
+        SpringApplication.run(SpringRest1Application.class, args);
     }
 }
