@@ -14,7 +14,7 @@ subprojects {
 	apply plugin: 'io.spring.dependency-management'
 
 	java {
-		sourceCompatibility = '17'
+		sourceCompatibility = '21'
 	}
 
 	configurations {

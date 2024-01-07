@@ -1,4 +1,5 @@
 rootProject.name = 'study'
 
 include ':spring:spring-rest1'
-include 'java:java-basic'
+include ':java:java-start'
+include ':java:java-basic'
