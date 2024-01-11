@@ -1,6 +1,7 @@
 package com.hoonjin.study.spring.rest1.user;
 
 import com.hoonjin.study.spring.rest1.exception.UserNotFoundException;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,7 +32,7 @@ public class UserController {
     }
 
     @PostMapping("/users")
-    public ResponseEntity<User> createUser(@RequestBody User user) {
+    public ResponseEntity<User> createUser(@Valid @RequestBody User user) {
         User newUser = userDaoService.save(user);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
