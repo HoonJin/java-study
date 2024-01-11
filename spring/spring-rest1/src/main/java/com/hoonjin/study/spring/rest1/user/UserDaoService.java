@@ -1,9 +1,11 @@
 package com.hoonjin.study.spring.rest1.user;
 
+import com.hoonjin.study.spring.rest1.exception.UserNotFoundException;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 @Component
@@ -44,6 +46,20 @@ public class UserDaoService {
 
     public User findOne(Integer id) {
         return users.stream().filter(u -> u.getId().equals(id))
-            .findAny().orElseThrow();
+            .findAny().orElse(null);
+    }
+
+    public User deleteById(Integer id) {
+        Iterator<User> iterator = users.iterator();
+        while (iterator.hasNext()) {
+            User user = iterator.next();
+
+            if (user.getId().equals(id)) {
+                iterator.remove();
+                return user;
+            }
+        }
+
+        throw new UserNotFoundException("NOT FOUND USER " + id);
     }
 }
