@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.springframework.web.util.UriComponents;
 
 import java.net.URI;
 import java.util.List;
@@ -51,7 +52,9 @@ public class UserController {
         EntityModel<User> entityModel = EntityModel.of(user);
         WebMvcLinkBuilder linkTo = linkTo(methodOn(this.getClass()).retrieveAllUsers());
         entityModel.add(linkTo.withRel("all-users"));
-        linkTo.toUriComponentsBuilder().build();
+
+        UriComponents components = linkTo.toUriComponentsBuilder().build();
+        System.out.println("components = " + components);
         return entityModel;
     }
 

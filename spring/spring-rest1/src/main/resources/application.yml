@@ -4,4 +4,10 @@ spring:
 
 logging:
   level:
-    org.springframework: debug
+    org.springframework: info
+management:
+  endpoints:
+    web:
+      exposure:
+#        include: health,beans,metrics
+        include: "*"
