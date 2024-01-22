@@ -1,10 +1,25 @@
 spring:
   messages:
     basename: messages
+  datasource:
+    url: jdbc:h2:mem:testdb
+    username: sa
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    defer-datasource-initialization: true # 원하는 ddl script를 하이버네이트 초기화 이후 실행하는 옵션
+    properties:
+      hibernate:
+        format_sql: true
+
 
 logging:
   level:
-    org.springframework: info
+    org:
+      springframework: info
+      hibernate:
+        SQL: DEBUG
+        type.descriptor.sql.BasicBinder: TRACE
 management:
   endpoints:
     web:

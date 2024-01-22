@@ -3,19 +3,30 @@ package com.hoonjin.study.spring.rest1.user;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.lang.Nullable;
 
 import java.util.Date;
 
 @Data
+@NoArgsConstructor
 @AllArgsConstructor
-//@JsonIgnoreProperties({"password", "ssn"})
-@Schema(description = "사용자 엔티딛")
+@JsonIgnoreProperties({"password", "ssn"})
+@Schema(description = "사용자 엔티티")
+@Entity
+@Table(name = "users")
 public class User {
+
+    @Id
+    @GeneratedValue
     @Schema(title = "사용자 id", description = "자동생성값")
     private Integer id;
 
