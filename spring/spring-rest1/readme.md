@@ -4,9 +4,18 @@
   ```shell
   # 회원 생성
   curl -v -XPOST localhost:8080/users \
-    -H 'Content-Type: application/json' \ 
-    -d '{"name":"test"}'
+  -H 'Content-Type: application/json' \
+  -d '{"name":"test"}'
 
   # 회원 삭제  
   curl -v -XDELETE localhost:8080/users/1
+  
+  
+  # JPA 회원 생성
+  curl -v -XPOST http://localhost:8080/jpa/users \
+  -H 'Content-Type: application/json' \
+  -d '{"name":"test"}'
+  
+  # jpa 회원 삭제
+  curl -v -XDELETE localhost:8080/jpa/users/210000000
   ```
