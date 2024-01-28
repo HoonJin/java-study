@@ -1,6 +1,7 @@
 package com.hoonjin.study.spring.rest1.user;
 
 import com.hoonjin.study.spring.rest1.exception.UserNotFoundException;
+import com.hoonjin.study.spring.rest1.post.Post;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.hateoas.EntityModel;
@@ -54,5 +55,13 @@ public class UserJpaController {
             .toUri();
 
         return ResponseEntity.created(uri).build();
+    }
+
+    @GetMapping("/users/{id}/posts")
+    public List<Post> retrieveAllPostsByUser(@PathVariable int id) {
+        User user = userRepository.findById(id)
+            .orElseThrow(() -> new UserNotFoundException("id " + id + " is not found"));
+
+        return user.getPosts();
     }
 }

@@ -18,4 +18,9 @@
   
   # jpa 회원 삭제
   curl -v -XDELETE localhost:8080/jpa/users/210000000
+  
+  # 게시물 등록
+  curl -v -XPOST localhost:8080/jpa/users/210000000/posts \
+  -H 'Content-Type: application/json' \
+  -d '{"description":"test post"}'
   ```
