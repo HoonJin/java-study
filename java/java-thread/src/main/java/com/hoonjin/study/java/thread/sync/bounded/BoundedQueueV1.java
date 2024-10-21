@@ -7,7 +7,7 @@ import static com.hoonjin.study.java.util.MyLogger.log;
 
 public class BoundedQueueV1 implements BoundedQueue {
 
-    private final Queue<String> queue = new ArrayDeque();
+    private final Queue<String> queue = new ArrayDeque<>();
     private final int MAX;
 
     public BoundedQueueV1(int max) {

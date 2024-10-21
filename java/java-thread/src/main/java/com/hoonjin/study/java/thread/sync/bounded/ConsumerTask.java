@@ -12,8 +12,8 @@ public class ConsumerTask implements Runnable {
 
     @Override
     public void run() {
-        log("[consume] start" + " <- " + boundedQueue);
+        log("[consume] start -    ?" + " <- " + boundedQueue);
         String take = boundedQueue.take();
-        log("[consume] end " + take + " <- " + boundedQueue);
+        log("[consume] end - " + take + " <- " + boundedQueue);
     }
 }

@@ -14,8 +14,8 @@ public class ProducerTask implements Runnable {
 
     @Override
     public void run() {
-        log("[produce] start" + request + " -> " + boundedQueue);
+        log("[produce] start - " + request + " -> " + boundedQueue);
         boundedQueue.put(request);
-        log("[produce] end" + request + " -> " + boundedQueue);
+        log("[produce] end - " + request + " -> " + boundedQueue);
     }
 }
