@@ -8,7 +8,7 @@ import static com.hoonjin.study.java.util.ThreadUtils.sleep;
 public class BoundedMain {
 
     public static void main(String[] args) {
-        var queue = new BoundedQueueV3(2);
+        var queue = new BoundedQueueV5(2);
 
 //        producerFirst(queue);
         consumerFirst(queue);
