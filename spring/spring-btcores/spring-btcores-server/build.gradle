@@ -2,7 +2,12 @@
 plugins {
     id 'war'
 }
+
+bootWar.enabled = false
+war.enabled = true
+
 dependencies {
     //서블릿
     implementation 'jakarta.servlet:jakarta.servlet-api:6.0.0'
+    implementation 'org.apache.tomcat.embed:tomcat-embed-core:11.0.0'
 }
