@@ -1,0 +1,24 @@
+
+//스프링 부트 외부 라이브러리 버전 변경
+//ext['tomcat.version']='10.1.4'
+
+dependencies {
+//    //스프링 웹, MVC
+//    implementation("org.springframework:spring-webmvc")
+//    //내장 톰캣
+//    implementation("org.apache.tomcat.embed:tomcat-embed-core")
+//    //JSON 처리
+//    implementation("com.fasterxml.jackson.core:jackson-databind")
+//    //스프링 부트 관련
+//    implementation("org.springframework.boot:spring-boot")
+//    implementation("org.springframework.boot:spring-boot-autoconfigure")
+//    //LOG 관련
+//    implementation("ch.qos.logback:logback-classic")
+//    implementation("org.apache.logging.log4j:log4j-to-slf4j")
+//    implementation("org.slf4j:jul-to-slf4j")
+//    //YML 관련
+//    implementation("org.yaml:snakeyaml")
+
+//     -> 위의 모든 것을 포함하는 것이 starter
+    implementation("org.springframework.boot:spring-boot-starter-web")
+}
