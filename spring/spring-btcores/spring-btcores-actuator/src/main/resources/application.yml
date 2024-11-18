@@ -1,0 +1,35 @@
+management:
+  server:
+    port: 8080 # 보안을 위해 포트를 변경하는 것을 권장
+  endpoint:
+    shutdown:
+      enabled: true
+    health:
+#      show-details: always
+      show-components: always # 컴포넌트만 보고 싶을 때
+  endpoints:
+    web:
+#      base-path: 'asdfjkasfhkasfhjk'
+      exposure:
+        include: '*'
+    jmx:
+      exposure:
+        include: health,info
+  info:
+    java:
+      enabled: true
+    os:
+      enabled: true
+    env:
+      enabled: true
+    git:
+      mode: full
+
+info:
+  app:
+    name: btcores-actuator
+    company: hoonjin
+
+logging:
+  level:
+    com.hoonjin.study.spring.btcores.actuator.controller: debug

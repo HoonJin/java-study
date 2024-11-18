@@ -1,0 +1,21 @@
+
+plugins {
+    id "com.gorylenko.gradle-git-properties" version "2.4.1" //git info
+}
+
+dependencies {
+    implementation("org.springframework.boot:spring-boot-starter-actuator")
+
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    runtimeOnly 'com.h2database:h2'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    //테스트에서 lombok 사용
+    testCompileOnly 'org.projectlombok:lombok'
+    testAnnotationProcessor 'org.projectlombok:lombok'
+}
+
+springBoot {
+    buildInfo()
+}
