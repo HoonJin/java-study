@@ -1,0 +1,11 @@
+spring:
+  datasource:
+#    driver-class-name: org.testcontainers.jdbc.ContainerDatabaseDriver # deprecate after 2.3.x
+#    url: jdbc:tc:postgresql:///test
+    url: jdbc:tc:postgresql:9.6.8:///test # https://java.testcontainers.org/modules/databases/jdbc/
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+
+container:
+  port: 5432
