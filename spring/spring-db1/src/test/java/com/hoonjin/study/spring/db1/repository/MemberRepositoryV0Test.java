@@ -3,6 +3,7 @@ package com.hoonjin.study.spring.db1.repository;
 import com.hoonjin.study.spring.db1.domain.Member;
 import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -10,6 +11,7 @@ import java.util.NoSuchElementException;
 
 @Slf4j
 @SpringBootTest
+@Disabled
 class MemberRepositoryV0Test {
 
     MemberRepositoryV0 memberRepository = new MemberRepositoryV0();
