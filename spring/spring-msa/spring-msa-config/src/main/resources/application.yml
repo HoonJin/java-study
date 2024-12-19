@@ -1,0 +1,31 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: config-server
+#  profiles:
+#    active: native
+  cloud:
+    config:
+      server:
+#        native:
+#          search-locations: optional:classpath:/
+        git:
+          uri: https://github.com/joneconsulting/spring-cloud-config
+          default-label: master
+#          username: github username
+#          passphrase: github token
+        bootstrap: true
+
+#  rabbitmq:
+#    host: localhost
+#    port: 5672
+#    username: guest
+#    password: guest
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
