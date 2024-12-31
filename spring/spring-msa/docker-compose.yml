@@ -17,6 +17,7 @@ services:
 #      KAFKA_NUM_PARTITIONS: 3
     ports:
       - 9092:9092
+
 #  rabbitmq:
 #    image: rabbitmq:3.13-alpine
 #    container_name: rabbitmq
@@ -25,3 +26,23 @@ services:
 #      RABBITMQ_DEFAULT_PASS: guest
 #    ports:
 #      - 5672:5672
+
+#  zipkin:
+#    image: openzipkin/zipkin-slim:3.4.3
+#    container_name: zipkin
+#    ports:
+#      - 9411:9411
+
+#  prometheus:
+#    image: prom/prometheus
+#    container_name: prometheus
+#    ports:
+#      - 9090:9090
+#    volumes:
+#      - prometheus.yml:/etc/prometheus/prometheus.yml
+
+#  grafana:
+#    image: grafana:grafana
+#    container_name: grafana
+#    ports:
+#      - 3000:3000

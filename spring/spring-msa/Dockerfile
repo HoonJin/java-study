@@ -1,6 +1,6 @@
-FROM amazoncorretto:17.0.8
+FROM amazoncorretto:21.0.5
 
-ARG NAME
-COPY ./${NAME}/build/libs/${NAME}-*-SNAPSHOT.jar ./app.jar
+ARG PATH
+COPY ./${PATH}/build/libs/*-SNAPSHOT.jar ./app.jar
 EXPOSE 8080:8080
 CMD ["java", "-jar", "app.jar"]

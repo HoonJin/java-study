@@ -10,7 +10,7 @@ $ docker build -t ${APP_NAME} . --build-arg NAME=${APP_NAME}
 
 ## docker compose for infra
 ```shell
-$ docker compose -f infra-docker-compose.yml up
+$ docker compose up -d
 $ docker exec -it kafka bash
 ### in docker shell
 $ cd /opt/kafka/bin

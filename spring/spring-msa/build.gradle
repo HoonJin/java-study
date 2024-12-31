@@ -16,10 +16,6 @@ subprojects {
         annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     }
 
-    test {
-        useJUnitPlatform()
-    }
-
     dependencyManagement {
         imports {
             mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
