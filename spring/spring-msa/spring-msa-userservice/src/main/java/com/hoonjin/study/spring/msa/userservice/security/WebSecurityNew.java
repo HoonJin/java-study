@@ -11,12 +11,14 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.expression.WebExpressionAuthorizationManager;
 import org.springframework.security.web.access.intercept.RequestAuthorizationContext;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.IpAddressMatcher;
 
@@ -36,16 +38,17 @@ public class WebSecurityNew {
 
     @Bean
     protected SecurityFilterChain configure(HttpSecurity http) throws Exception {
-        // Configure AuthenticationManagerBuilder
-        AuthenticationManagerBuilder authenticationManagerBuilder =
-            http.getSharedObject(AuthenticationManagerBuilder.class);
-        authenticationManagerBuilder.userDetailsService(userService).passwordEncoder(bCryptPasswordEncoder);
+        AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
+        authenticationManagerBuilder
+            .userDetailsService(userService)
+            .passwordEncoder(bCryptPasswordEncoder);
 
         AuthenticationManager authenticationManager = authenticationManagerBuilder.build();
 
         http
             .csrf(AbstractHttpConfigurer::disable)
-            .authorizeHttpRequests((authz) -> authz
+            .authorizeHttpRequests(authz ->
+                authz
                     .requestMatchers(new AntPathRequestMatcher("/actuator/**")).permitAll()
                     .requestMatchers(new AntPathRequestMatcher("/h2-console/**")).permitAll()
                     .requestMatchers(new AntPathRequestMatcher("/users", "POST")).permitAll()
@@ -54,20 +57,23 @@ public class WebSecurityNew {
                     .requestMatchers(new AntPathRequestMatcher("/swagger-ui/**")).permitAll()
                     .requestMatchers(new AntPathRequestMatcher("/swagger-resources/**")).permitAll()
                     .requestMatchers(new AntPathRequestMatcher("/v3/api-docs/**")).permitAll()
-//                        .requestMatchers("/**").access(this::hasIpAddress)
+                    .requestMatchers(new AntPathRequestMatcher("/error")).permitAll()
+//                    .requestMatchers("/**").access(this::hasIpAddress)
                     .requestMatchers("/**").access(
                         new WebExpressionAuthorizationManager("hasIpAddress('localhost') or hasIpAddress('127.0.0.1') or hasIpAddress('172.30.96.94')")
                     )
                     .anyRequest()
-                    .authenticated()
+                    .permitAll()
+//                    .authenticated()
             )
             .authenticationManager(authenticationManager)
-            .sessionManagement((session) -> session
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            .addFilterBefore(getAuthenticationFilter(authenticationManager), BasicAuthenticationFilter.class)
+            .sessionManagement(session ->
+                session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             )
-            .addFilter(getAuthenticationFilter(authenticationManager))
-            .headers((headers) -> headers.frameOptions((frameOptions) -> frameOptions.sameOrigin()));
-
+            .headers(headers ->
+                headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin)
+            );
         return http.build();
     }
 

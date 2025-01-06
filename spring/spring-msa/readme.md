@@ -25,3 +25,32 @@ $ ./kafka-console-consumer.sh --topic quickstart-events --bootstrap-server local
 # 토픽 삭제
 $ ./kafka-topics.sh --delete --topic quickstart-events --bootstrap-server localhost:9092
 ```
+
+## usage
+```shell
+$ curl -X 'POST' \
+  'http://localhost:8000/user-service/users' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "email": "string@string.com",
+  "name": "string",
+  "pwd": "stringst"
+}'
+
+$ curl -XPOST http://localhost:8000/user-service/login -H 'Content-Type: application/json' \
+  -d '{
+  "email": "string@string.com",
+  "password": "stringst"
+}'
+
+$ curl -v http://localhost:8000/user-service/users -H 'Content-Type: application/json' \
+  -H 'Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiI1OTA2ZGU5Zi1lMDVkLTRkN2MtOTQ2ZS1jZDA3NDU3ZGI1YTgiLCJleHAiOjE3MzYyMTczMTUsImlhdCI6MTczNjEzMDkxNX0.7Rd4lrzJBbbxQo0xl0X_XPwtFSB68XXxk91WV5ZNHeO_6fktDH3TZkCf-g1gsGZc'
+
+$ curl -XPOST -v http://localhost:8000/order-service/5906de9f-e05d-4d7c-946e-cd07457db5a8/orders -H 'Content-Type: application/json' \
+  -H 'Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiI1OTA2ZGU5Zi1lMDVkLTRkN2MtOTQ2ZS1jZDA3NDU3ZGI1YTgiLCJleHAiOjE3MzYyMTczMTUsImlhdCI6MTczNjEzMDkxNX0.7Rd4lrzJBbbxQo0xl0X_XPwtFSB68XXxk91WV5ZNHeO_6fktDH3TZkCf-g1gsGZc' \
+  -d '{
+  "productId": "CATALOG-001",
+  "qty": "5",
+  "unitPrice": "1500"
+}'
+```

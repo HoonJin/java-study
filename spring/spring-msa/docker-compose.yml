@@ -18,20 +18,20 @@ services:
     ports:
       - 9092:9092
 
-#  rabbitmq:
-#    image: rabbitmq:3.13-alpine
-#    container_name: rabbitmq
-#    environment:
-#      RABBITMQ_DEFAULT_USER: guest
-#      RABBITMQ_DEFAULT_PASS: guest
-#    ports:
-#      - 5672:5672
+  rabbitmq:
+    image: rabbitmq:3.13-alpine
+    container_name: rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    ports:
+      - 5672:5672
 
-#  zipkin:
-#    image: openzipkin/zipkin-slim:3.4.3
-#    container_name: zipkin
-#    ports:
-#      - 9411:9411
+  zipkin:
+    image: openzipkin/zipkin-slim:3.4.3
+    container_name: zipkin
+    ports:
+      - 9411:9411
 
 #  prometheus:
 #    image: prom/prometheus

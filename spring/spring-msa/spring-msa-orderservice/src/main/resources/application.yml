@@ -4,16 +4,13 @@ server:
 spring:
   application:
     name: order-service
-#  config:
-#    import: "optional:configserver:http://localhost:8888"
-  #  rabbitmq:
-  #    host: 127.0.0.1
-  #    port: 5672
-  #    username: guest
-  #    password: guest
-#  zipkin:
-#    base-url: http://127.0.0.1:9411
-#    enabled: true
+  config:
+    import: "optional:configserver:http://localhost:8888"
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
   h2:
     console:
       enabled: true

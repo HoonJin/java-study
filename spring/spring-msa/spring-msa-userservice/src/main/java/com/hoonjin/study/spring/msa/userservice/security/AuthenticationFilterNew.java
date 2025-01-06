@@ -29,8 +29,8 @@ import java.util.Date;
 @Slf4j
 public class AuthenticationFilterNew extends UsernamePasswordAuthenticationFilter {
 
-    private UserService userService;
-    private Environment environment;
+    private final UserService userService;
+    private final Environment environment;
 
     public AuthenticationFilterNew(AuthenticationManager authenticationManager,
                                    UserService userService, Environment environment) {
@@ -40,14 +40,12 @@ public class AuthenticationFilterNew extends UsernamePasswordAuthenticationFilte
     }
 
     @Override
-    public Authentication attemptAuthentication(HttpServletRequest req, HttpServletResponse res)
-        throws AuthenticationException {
+    public Authentication attemptAuthentication(HttpServletRequest req, HttpServletResponse res) throws AuthenticationException {
         try {
-
             RequestLogin creds = new ObjectMapper().readValue(req.getInputStream(), RequestLogin.class);
-
             return getAuthenticationManager().authenticate(
-                new UsernamePasswordAuthenticationToken(creds.getEmail(), creds.getPassword(), new ArrayList<>()));
+                new UsernamePasswordAuthenticationToken(creds.getEmail(), creds.getPassword(), new ArrayList<>())
+            );
 
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -55,13 +53,12 @@ public class AuthenticationFilterNew extends UsernamePasswordAuthenticationFilte
     }
 
     @Override
-    protected void successfulAuthentication(HttpServletRequest req, HttpServletResponse res, FilterChain chain,
-                                            Authentication auth) throws IOException, ServletException {
-
+    protected void successfulAuthentication(HttpServletRequest req, HttpServletResponse res, FilterChain chain, Authentication auth) throws IOException, ServletException {
         String userName = ((User) auth.getPrincipal()).getUsername();
         UserDto userDetails = userService.getUserDetailsByEmail(userName);
 
-        byte[] secretKeyBytes = Base64.getEncoder().encode(environment.getProperty("token.secret").getBytes());
+        String secret = environment.getProperty("token.secret");
+        byte[] secretKeyBytes = Base64.getEncoder().encode(secret.getBytes());
 
         SecretKey secretKey = Keys.hmacShaKeyFor(secretKeyBytes);
 
@@ -74,6 +71,7 @@ public class AuthenticationFilterNew extends UsernamePasswordAuthenticationFilte
             .signWith(secretKey)
             .compact();
 
+        res.getWriter().write(token);
         res.addHeader("token", token);
         res.addHeader("userId", userDetails.getUserId());
     }

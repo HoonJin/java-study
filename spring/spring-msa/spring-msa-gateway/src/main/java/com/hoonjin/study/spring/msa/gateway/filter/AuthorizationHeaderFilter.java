@@ -1,5 +1,6 @@
 package com.hoonjin.study.spring.msa.gateway.filter;
 
+import io.jsonwebtoken.JwtParser;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.Data;
@@ -47,7 +48,6 @@ public class AuthorizationHeaderFilter extends AbstractGatewayFilterFactory<Auth
                     return onError(exchange, "JWT token is not valid", HttpStatus.UNAUTHORIZED);
                 }
             } else {
-                log.error("invalid jwt but pass");
                 return chain.filter(exchange);
             }
         };
@@ -70,14 +70,16 @@ public class AuthorizationHeaderFilter extends AbstractGatewayFilterFactory<Auth
     }
 
     private boolean isValidJwt(String token) {
-        byte[] secretKeyBytes = Base64.getEncoder().encode(environment.getProperty("token.secret").getBytes());
+        String secret = environment.getProperty("token.secret");
+        byte[] secretKeyBytes = Base64.getEncoder().encode(secret.getBytes());
         SecretKey signingKey = new SecretKeySpec(secretKeyBytes, SignatureAlgorithm.HS512.getJcaName());
-
         try {
-            String subject = Jwts.parserBuilder()
+            JwtParser parser = Jwts.parserBuilder()
                 .setSigningKey(signingKey)
-                .build()
-                .parseClaimsJws(token).getBody()
+                .build();
+            String subject = parser
+                .parseClaimsJws(token)
+                .getBody()
                 .getSubject();
             return !(subject == null || subject.isEmpty());
         } catch (Exception e) {
