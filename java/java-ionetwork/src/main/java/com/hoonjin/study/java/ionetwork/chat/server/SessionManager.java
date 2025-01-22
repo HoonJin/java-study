@@ -34,7 +34,7 @@ public class SessionManager {
         }
     }
 
-    public synchronized List<String> getAllUserName() {
+    public synchronized List<String> getAllUsername() {
         return sessions.stream().map(Session::getUsername)
             .filter(Objects::nonNull).toList();
     }

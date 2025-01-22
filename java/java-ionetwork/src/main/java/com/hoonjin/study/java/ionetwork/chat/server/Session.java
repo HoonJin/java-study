@@ -1,6 +1,7 @@
 package com.hoonjin.study.java.ionetwork.chat.server;
 
 import lombok.Getter;
+import lombok.Setter;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -19,6 +20,8 @@ public class Session implements Runnable {
     private final SessionManager sessionManager;
 
     private boolean closed = false;
+
+    @Setter
     @Getter
     private String username;
 
