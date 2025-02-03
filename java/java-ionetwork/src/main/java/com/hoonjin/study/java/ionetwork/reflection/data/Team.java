@@ -1,26 +1,21 @@
 package com.hoonjin.study.java.ionetwork.reflection.data;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+@NoArgsConstructor
 @Getter
 @Setter
 @ToString
-public class User {
+public class Team {
 
     private String id;
     private String name;
-    private Integer age;
 
-    public User() {
-    }
-
-    public User(String id, String name, Integer age) {
+    public Team(String id, String name) {
         this.id = id;
         this.name = name;
-        this.age = age;
     }
-
-
 }
