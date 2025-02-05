@@ -5,7 +5,7 @@
 ### in root of project
 ### APP_NAME=spring-msa-gateway
 $ ./gradlew :clean :spring:spring-msa:${APP_NAME}:build -x test
-$ docker build -t ${APP_NAME} . --build-arg NAME=${APP_NAME}
+$ docker build -t ${APP_NAME} spring/spring-msa --build-arg PATH=${APP_NAME}
 ```
 
 ## docker compose for infra
