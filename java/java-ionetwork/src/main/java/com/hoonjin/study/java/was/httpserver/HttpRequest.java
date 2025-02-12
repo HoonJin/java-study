@@ -19,10 +19,12 @@ public class HttpRequest {
     private String path;
     private final Map<String, String> queryParameters = new HashMap<>();
     private final Map<String, String> headers = new HashMap<>();
+    private final Map<String, String> bodies = new HashMap<>();
 
     public HttpRequest(BufferedReader reader) throws IOException {
         parseRequestLine(reader);
         parseRequestHeaders(reader);
+        parseRequestBody(reader);
     }
 
     private void parseRequestLine(BufferedReader reader) throws IOException {
@@ -62,8 +64,41 @@ public class HttpRequest {
         }
     }
 
+    private void parseRequestBodies(String plainBody) {
+        for (String query : plainBody.split("&")) {
+            String[] keyAndValue = query.split("=");
+            String key = URLDecoder.decode(keyAndValue[0], UTF_8);
+            String value = keyAndValue.length > 1 ? URLDecoder.decode(keyAndValue[1], UTF_8) : "";
+            bodies.put(key, value);
+        }
+    }
+
+    private void parseRequestBody(BufferedReader reader) throws IOException {
+        if (!headers.containsKey("Content-Length")) {
+            return;
+        }
+
+        int contentLength = Integer.parseInt(headers.get("Content-Length"));
+        char[] chars = new char[contentLength];
+        int read = reader.read(chars);
+        if (read != contentLength) {
+            throw new IOException("Fail to read entire body. Expected " + contentLength);
+        }
+
+        String body = new String(chars);
+
+        String contentType = headers.get("Content-Type");
+        if ("application/x-www-form-urlencoded".equals(contentType)) {
+            parseRequestBodies(body);
+        }
+    }
+
     public String getParameter(String name) {
         return queryParameters.get(name);
+    }
+
+    public String getBody(String name) {
+        return bodies.get(name);
     }
 
     public String getHeader(String name) {
