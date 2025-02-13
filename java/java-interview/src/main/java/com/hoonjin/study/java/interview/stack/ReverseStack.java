@@ -45,7 +45,7 @@ public class ReverseStack {
 
     // 시간 복잡도 N, 공간 복잡도 N
     private Stack<Integer> solution1(Stack<Integer> stack) {
-        Stack<Integer> reversedStack = pnew Stack<>();
+        Stack<Integer> reversedStack = new Stack<>();
         while (!stack.isEmpty()) {
             reversedStack.push(stack.pop());
         }
