@@ -1,5 +1,6 @@
 package com.hoonjin.study.spring.hello;
 
+import com.hoonjin.study.spring.config.MySpringBootApplication;
 import org.springframework.boot.SpringApplication;
 
 @MySpringBootApplication
