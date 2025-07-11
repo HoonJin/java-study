@@ -4,13 +4,13 @@ import lombok.Getter;
 import lombok.ToString;
 import org.springframework.util.Assert;
 
-import java.util.Objects;
+import static java.util.Objects.requireNonNull;
 
 @Getter
 @ToString
 public class Member {
 
-    private String email;
+    private Email email;
 
     private String nickname;
 
@@ -18,18 +18,25 @@ public class Member {
 
     private MemberStatus status;
 
-    public Member(String email, String nickname, String passwordHash) {
-        this.email = Objects.requireNonNull(email);
-        this.nickname = Objects.requireNonNull(nickname);
-        this.passwordHash = Objects.requireNonNull(passwordHash);
-        this.status = MemberStatus.PENDING;
+    private Member() {
+    }
+
+    static Member create(MemberCreateRequest request, PasswordEncoder passwordEncoder) {
+        Member member = new Member();
+
+        member.email = new Email(requireNonNull(request.email()));
+        member.nickname = requireNonNull(request.nickname());
+        member.passwordHash = passwordEncoder.encode(requireNonNull(request.password()));
+
+        member.status = MemberStatus.PENDING;
+
+        return member;
     }
 
     public void activate() {
 //        if (status != MemberStatus.PENDING) {
 //            throw new IllegalStateException("Member is already activated or deactivated");
-//        }
-        // 장황한 if 문 대신 Assert 사용
+//        }// 장황한 if 문 대신 Assert 사용
         Assert.state(status == MemberStatus.PENDING, "PENDING 상태의 회원만 활성화할 수 있습니다");
 
         status = MemberStatus.ACTIVE;
@@ -39,5 +46,21 @@ public class Member {
         Assert.state(status == MemberStatus.ACTIVE, "ACTIVE 상태가 아닙니다");
 
         status = MemberStatus.DEACTIVATED;
+    }
+
+    public boolean verifyPassword(String secret, PasswordEncoder passwordEncoder) {
+        return passwordEncoder.matches(secret, passwordHash);
+    }
+
+    public void changeNickname(String nickname) {
+        this.nickname = requireNonNull(nickname);
+    }
+
+    public void changePassword(String password, PasswordEncoder passwordEncoder) {
+        this.passwordHash = passwordEncoder.encode(requireNonNull(password));
+    }
+
+    public boolean isActive() {
+        return status == MemberStatus.ACTIVE;
     }
 }
