@@ -1,6 +1,8 @@
 package com.hoonjin.study.spring.splearn.domain;
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.springframework.util.Assert;
 
@@ -8,6 +10,7 @@ import static java.util.Objects.requireNonNull;
 
 @Getter
 @ToString
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class Member {
 
     private Email email;
@@ -18,10 +21,7 @@ public class Member {
 
     private MemberStatus status;
 
-    private Member() {
-    }
-
-    static Member create(MemberCreateRequest request, PasswordEncoder passwordEncoder) {
+    static Member register(MemberRegisterRequest request, PasswordEncoder passwordEncoder) {
         Member member = new Member();
 
         member.email = new Email(requireNonNull(request.email()));

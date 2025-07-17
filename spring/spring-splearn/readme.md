@@ -53,24 +53,24 @@ _Entity_
 - `passwordHash`: 비밀번호 해시
 - `status`: `MemberStatus` 회원 상태
 #### 행위
-- `static create()`: 회원 생성: email, nickname, password, passwordEncoder
-- `activate()`: 가입을 완료 시킨다
+- `static register()`: 회원 등록: email, nickname, password, passwordEncoder
+- `activate()`: 등록을 완료 시킨다
 - `deactivate()`: 탈퇴한다
 - `verifyPassword()`: 비밀번호를 검증한다
 - `changeNickname()`: 닉네임을 변경한다
 - `changePassword()`: 비밀번호를 변경한다
 #### 규칙
-- 회원 생성 후 상태는 가입 대기 상태
-- 일정 조건을 만족하면 가입 완료가 된다
-- 가입 대기 상태에서만 가입 완료가 될 수 있다
-- 가입 완료 상태에서 탈퇴할 수 있다
+- 회원 등록 후 상태는 등록 대기 상태
+- 일정 조건을 만족하면 등록 완료가 된다
+- 등록 대기 상태에서만 등록 완료가 될 수 있다
+- 등록 완료 상태에서 탈퇴할 수 있다
 - 회원의 비밀번호는 해시를 만들어서 저장한다
 
 #### 회원 상태(MemberStatus)
 _Enum_
 #### 상수
-- `PENDING`: 가입 대기
-- `ACTIVE`: 가입 완료
+- `PENDING`: 등록 대기
+- `ACTIVE`: 등록 완료
 - `DEACTIVATED`: 탈퇴
 
 ### 비밀번호 인코더(PasswordEncoder)
@@ -106,6 +106,26 @@ _Domain Service_
 
 ---
 
-# 개발 가이드
+# Splearn 개발 가이드
 
----
+## 아키텍처
+- 헥사고날 아키텍처
+- 도메인 모델 패턴
+
+### 계층
+- Domain Layer
+- Application Layer
+- Adapter Layer
+
+> 외부(Actor) -> 어댑터 -> 어플리케이션 -> 도메인
+
+## 패키지
+- domain
+- application
+  - required
+  - provided
+- adapter
+  - webapi
+  - persistence
+  - integration
+  - security
