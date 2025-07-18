@@ -3,6 +3,8 @@ package com.hoonjin.study.spring.splearn.domain;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static com.hoonjin.study.spring.splearn.domain.MemberFixture.createMemberRegisterRequest;
+import static com.hoonjin.study.spring.splearn.domain.MemberFixture.createpasswordEncoder;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -13,18 +15,8 @@ class MemberTest {
 
     @BeforeEach
     void setUp() {
-        passwordEncoder = new PasswordEncoder() {
-            @Override
-            public String encode(String password) {
-                return password.toUpperCase();
-            }
-
-            @Override
-            public boolean matches(String password, String PasswordHash) {
-                return encode(password).equals(PasswordHash);
-            }
-        };
-        member = Member.register(new MemberRegisterRequest("toby@splearn.app", "Toby", "secret"), passwordEncoder);
+        passwordEncoder = createpasswordEncoder();
+        member = Member.register(createMemberRegisterRequest(), passwordEncoder);
     }
 
     @Test
@@ -34,7 +26,7 @@ class MemberTest {
 
     @Test
     void registerMember_nullCheck() {
-        assertThatThrownBy(() -> Member.register(new MemberRegisterRequest(null, "Toby", "secret"), passwordEncoder))
+        assertThatThrownBy(() -> Member.register(createMemberRegisterRequest(null), passwordEncoder))
             .isInstanceOf(NullPointerException.class);
     }
 
@@ -112,9 +104,9 @@ class MemberTest {
     @Test
     void invalidEmail() {
         assertThatThrownBy(() ->
-            Member.register(new MemberRegisterRequest("invalid-email", "Toby", "pasword"), passwordEncoder)
+            Member.register(createMemberRegisterRequest("invalid-email"), passwordEncoder)
         ).isInstanceOf(IllegalArgumentException.class);
 
-        Member.register(new MemberRegisterRequest("tobylee@gmail.com", "Toby", "pasword"), passwordEncoder);
+        Member.register(createMemberRegisterRequest("tobylee@gmail.com"), passwordEncoder);
     }
 }

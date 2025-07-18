@@ -1,9 +1,11 @@
 package com.hoonjin.study.spring.splearn.domain;
 
+import jakarta.persistence.Embeddable;
 import org.springframework.util.Assert;
 
 import java.util.regex.Pattern;
 
+@Embeddable
 public record Email(
     String address
 ) {
