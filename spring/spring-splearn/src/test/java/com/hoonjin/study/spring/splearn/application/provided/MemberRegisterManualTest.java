@@ -1,6 +1,7 @@
 package com.hoonjin.study.spring.splearn.application.provided;
 
-import com.hoonjin.study.spring.splearn.application.MemberService;
+import com.hoonjin.study.spring.splearn.application.MemberModifyService;
+import com.hoonjin.study.spring.splearn.application.MemberQueryService;
 import com.hoonjin.study.spring.splearn.application.required.EmailSender;
 import com.hoonjin.study.spring.splearn.application.required.MemberRepository;
 import com.hoonjin.study.spring.splearn.domain.Email;
@@ -23,7 +24,8 @@ class MemberRegisterManualTest {
 
     @Test
     void registerTestStub() {
-        MemberRegister register = new MemberService(
+        MemberRegister register = new MemberModifyService(
+            new MemberQueryService(new MemberRepositoryStub()),
             new MemberRepositoryStub(), // MemberRepository
             new EmailSenderStub(), // EmailSender
             MemberFixture.createpasswordEncoder()
@@ -38,7 +40,8 @@ class MemberRegisterManualTest {
     @Test
     void registerTestMock() {
         EmailSenderMock emailSenderMock = new EmailSenderMock();
-        MemberRegister register = new MemberService(
+        MemberRegister register = new MemberModifyService(
+            new MemberQueryService(new MemberRepositoryStub()),
             new MemberRepositoryStub(), // MemberRepository
             emailSenderMock, // EmailSender
             MemberFixture.createpasswordEncoder()
@@ -56,7 +59,8 @@ class MemberRegisterManualTest {
     @Test
     void registerTestMockito() {
         EmailSender emailSenderMock = Mockito.mock(EmailSender.class);
-        MemberRegister register = new MemberService(
+        MemberRegister register = new MemberModifyService(
+            new MemberQueryService(new MemberRepositoryStub()),
             new MemberRepositoryStub(), // MemberRepository
             emailSenderMock, // EmailSender
             MemberFixture.createpasswordEncoder()
@@ -84,6 +88,11 @@ class MemberRegisterManualTest {
 
         @Override
         public Optional<Member> findByEmail(Email email) {
+            return Optional.empty();
+        }
+
+        @Override
+        public Optional<Member> findById(Long memberId) {
             return Optional.empty();
         }
     }
