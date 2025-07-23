@@ -1,4 +1,4 @@
-package com.hoonjin.study.spring.splearn.domain;
+package com.hoonjin.study.spring.splearn.domain.shared;
 
 import org.springframework.util.Assert;
 

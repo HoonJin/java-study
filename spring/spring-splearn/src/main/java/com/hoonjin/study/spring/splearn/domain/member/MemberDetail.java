@@ -1,0 +1,54 @@
+package com.hoonjin.study.spring.splearn.domain.member;
+
+import com.hoonjin.study.spring.splearn.domain.AbstractEntity;
+import jakarta.persistence.Embedded;
+import jakarta.persistence.Entity;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+import org.springframework.util.Assert;
+
+import java.time.LocalDateTime;
+
+import static java.util.Objects.requireNonNull;
+
+@Entity
+@Getter
+@ToString(callSuper = true)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public class MemberDetail extends AbstractEntity {
+
+    @Embedded
+    private Profile profile;
+
+    private String introduction;
+
+    private LocalDateTime registeredAt;
+
+    private LocalDateTime activatedAt;
+
+    private LocalDateTime deactivatedAt;
+
+    static MemberDetail create() {
+        MemberDetail memberDetail = new MemberDetail();
+        memberDetail.registeredAt = LocalDateTime.now();
+        return memberDetail;
+    }
+
+    void activate() {
+        Assert.isNull(activatedAt, "이미 활성화된 회원입니다.");
+        activatedAt = LocalDateTime.now();
+    }
+
+    void deactivate() {
+        Assert.isNull(deactivatedAt, "이미 비활성화된 회원입니다.");
+        Assert.notNull(activatedAt, "활성화된 회원만 비활성화할 수 있습니다.");
+        deactivatedAt = LocalDateTime.now();
+    }
+
+    void updateInfo(MemberInfoUpdateRequest updateRequest) {
+        profile = new Profile(updateRequest.profileAddress());
+        introduction = requireNonNull(updateRequest.introduction());
+    }
+}

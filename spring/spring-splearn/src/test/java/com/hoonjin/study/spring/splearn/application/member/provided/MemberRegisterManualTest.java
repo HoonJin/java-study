@@ -1,13 +1,13 @@
-package com.hoonjin.study.spring.splearn.application.provided;
+package com.hoonjin.study.spring.splearn.application.member.provided;
 
-import com.hoonjin.study.spring.splearn.application.MemberModifyService;
-import com.hoonjin.study.spring.splearn.application.MemberQueryService;
-import com.hoonjin.study.spring.splearn.application.required.EmailSender;
-import com.hoonjin.study.spring.splearn.application.required.MemberRepository;
-import com.hoonjin.study.spring.splearn.domain.Email;
-import com.hoonjin.study.spring.splearn.domain.Member;
-import com.hoonjin.study.spring.splearn.domain.MemberFixture;
-import com.hoonjin.study.spring.splearn.domain.MemberStatus;
+import com.hoonjin.study.spring.splearn.application.member.MemberModifyService;
+import com.hoonjin.study.spring.splearn.application.member.MemberQueryService;
+import com.hoonjin.study.spring.splearn.application.member.required.EmailSender;
+import com.hoonjin.study.spring.splearn.application.member.required.MemberRepository;
+import com.hoonjin.study.spring.splearn.domain.shared.Email;
+import com.hoonjin.study.spring.splearn.domain.member.Member;
+import com.hoonjin.study.spring.splearn.domain.member.MemberFixture;
+import com.hoonjin.study.spring.splearn.domain.member.MemberStatus;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.test.util.ReflectionTestUtils;

@@ -1,8 +1,8 @@
-package com.hoonjin.study.spring.splearn.application.provided;
+package com.hoonjin.study.spring.splearn.application.member.provided;
 
 import com.hoonjin.study.spring.splearn.SplearnTestConfiguration;
-import com.hoonjin.study.spring.splearn.domain.Member;
-import com.hoonjin.study.spring.splearn.domain.MemberFixture;
+import com.hoonjin.study.spring.splearn.domain.member.Member;
+import com.hoonjin.study.spring.splearn.domain.member.MemberFixture;
 import jakarta.persistence.EntityManager;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;

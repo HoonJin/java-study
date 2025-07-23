@@ -1,7 +1,7 @@
-package com.hoonjin.study.spring.splearn.application.provided;
+package com.hoonjin.study.spring.splearn.application.member.provided;
 
 import com.hoonjin.study.spring.splearn.SplearnTestConfiguration;
-import com.hoonjin.study.spring.splearn.domain.*;
+import com.hoonjin.study.spring.splearn.domain.member.*;
 import jakarta.persistence.EntityManager;
 import jakarta.validation.ConstraintViolationException;
 import org.junit.jupiter.api.Test;

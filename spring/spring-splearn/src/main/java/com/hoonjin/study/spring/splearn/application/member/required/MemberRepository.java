@@ -1,7 +1,7 @@
-package com.hoonjin.study.spring.splearn.application.required;
+package com.hoonjin.study.spring.splearn.application.member.required;
 
-import com.hoonjin.study.spring.splearn.domain.Email;
-import com.hoonjin.study.spring.splearn.domain.Member;
+import com.hoonjin.study.spring.splearn.domain.shared.Email;
+import com.hoonjin.study.spring.splearn.domain.member.Member;
 import org.springframework.data.repository.Repository;
 
 import java.util.Optional;

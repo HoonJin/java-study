@@ -1,6 +1,6 @@
 package com.hoonjin.study.spring.splearn.adapter.integration;
 
-import com.hoonjin.study.spring.splearn.domain.Email;
+import com.hoonjin.study.spring.splearn.domain.shared.Email;
 import org.junit.jupiter.api.Test;
 import org.junitpioneer.jupiter.StdIo;
 import org.junitpioneer.jupiter.StdOut;

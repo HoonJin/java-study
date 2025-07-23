@@ -1,8 +1,8 @@
 package com.hoonjin.study.spring.splearn;
 
-import com.hoonjin.study.spring.splearn.application.required.EmailSender;
-import com.hoonjin.study.spring.splearn.domain.MemberFixture;
-import com.hoonjin.study.spring.splearn.domain.PasswordEncoder;
+import com.hoonjin.study.spring.splearn.application.member.required.EmailSender;
+import com.hoonjin.study.spring.splearn.domain.member.MemberFixture;
+import com.hoonjin.study.spring.splearn.domain.member.PasswordEncoder;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 

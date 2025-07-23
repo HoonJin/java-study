@@ -1,14 +1,15 @@
-package com.hoonjin.study.spring.splearn.application.required;
+package com.hoonjin.study.spring.splearn.application.member.required;
 
-import com.hoonjin.study.spring.splearn.domain.Member;
+import com.hoonjin.study.spring.splearn.domain.member.Member;
+import com.hoonjin.study.spring.splearn.domain.member.MemberStatus;
 import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.dao.DataIntegrityViolationException;
 
-import static com.hoonjin.study.spring.splearn.domain.MemberFixture.createMemberRegisterRequest;
-import static com.hoonjin.study.spring.splearn.domain.MemberFixture.createpasswordEncoder;
+import static com.hoonjin.study.spring.splearn.domain.member.MemberFixture.createMemberRegisterRequest;
+import static com.hoonjin.study.spring.splearn.domain.member.MemberFixture.createpasswordEncoder;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -29,9 +30,13 @@ class MemberRepositoryTest {
 
         memberRepository.save(member);
 
-        assertThat(member.getId()).isNotNull();
-
         entityManager.flush();
+        entityManager.clear();
+
+        Member found = memberRepository.findById(member.getId()).orElseThrow();
+        assertThat(found.getStatus()).isEqualTo(MemberStatus.PENDING);
+        assertThat(found.getDetail().getRegisteredAt()).isNotNull();
+
     }
 
     @Test
