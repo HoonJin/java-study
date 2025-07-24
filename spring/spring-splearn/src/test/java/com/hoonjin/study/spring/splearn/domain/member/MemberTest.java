@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 
 import static com.hoonjin.study.spring.splearn.domain.member.MemberFixture.createMemberRegisterRequest;
 import static com.hoonjin.study.spring.splearn.domain.member.MemberFixture.createpasswordEncoder;
-import static org.assertj.core.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -121,11 +120,19 @@ class MemberTest {
     void updateInfo() {
         member.activate();
 
-        MemberInfoUpdateRequest updateRequest = new MemberInfoUpdateRequest("Leo", "toby100", "자기소개");
+        MemberInfoUpdateRequest updateRequest = new MemberInfoUpdateRequest("Peter", "toby100", "자기소개");
         member.updateInfo(updateRequest);
 
         assertThat(member.getNickname()).isEqualTo(updateRequest.nickname());
         assertThat(member.getDetail().getProfile().address()).isEqualTo(updateRequest.profileAddress());
         assertThat(member.getDetail().getIntroduction()).isEqualTo(updateRequest.introduction());
+    }
+
+    @Test
+    void updateInfoFail() {
+        MemberInfoUpdateRequest updateRequest = new MemberInfoUpdateRequest("Peter", "toby100", "자기소개");
+
+        assertThatThrownBy(() -> member.updateInfo(updateRequest))
+            .isInstanceOf(IllegalStateException.class);
     }
 }

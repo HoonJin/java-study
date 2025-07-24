@@ -4,10 +4,7 @@ import com.hoonjin.study.spring.splearn.application.member.provided.MemberFinder
 import com.hoonjin.study.spring.splearn.application.member.provided.MemberRegister;
 import com.hoonjin.study.spring.splearn.application.member.required.EmailSender;
 import com.hoonjin.study.spring.splearn.application.member.required.MemberRepository;
-import com.hoonjin.study.spring.splearn.domain.member.Member;
-import com.hoonjin.study.spring.splearn.domain.member.MemberRegisterRequest;
-import com.hoonjin.study.spring.splearn.domain.member.PasswordEncoder;
-import com.hoonjin.study.spring.splearn.domain.member.DuplicateEmailException;
+import com.hoonjin.study.spring.splearn.domain.member.*;
 import com.hoonjin.study.spring.splearn.domain.shared.Email;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -44,6 +41,36 @@ public class MemberModifyService implements MemberRegister {
         member.activate();
 
         return memberRepository.save(member);
+    }
+
+    @Override
+    public Member deactivate(Long memberId) {
+        Member member = memberFinder.find(memberId);
+
+        member.deactivate();
+
+        return memberRepository.save(member);
+    }
+
+    @Override
+    public Member updateInfo(Long memberId, MemberInfoUpdateRequest updateRequest) {
+        Member member = memberFinder.find(memberId);
+
+        checkDuplicateProfile(member, updateRequest.profileAddress());
+
+        member.updateInfo(updateRequest);
+
+        return memberRepository.save(member);
+    }
+
+    private void checkDuplicateProfile(Member member, String profileAddress) {
+        if (profileAddress.isEmpty()) return;
+        Profile profile = member.getDetail().getProfile();
+        if (profile != null && profile.address().equals(profileAddress)) return;
+
+        memberRepository.findByProfile(new Profile(profileAddress)).ifPresent(existingMember -> {
+            throw new DuplicateProfileException("이미 등록된 프로필 주소입니다.");
+        });
     }
 
     private void checkDuplicateEmail(MemberRegisterRequest registerRequest) {

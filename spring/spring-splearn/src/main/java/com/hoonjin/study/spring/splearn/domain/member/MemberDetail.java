@@ -1,7 +1,6 @@
 package com.hoonjin.study.spring.splearn.domain.member;
 
 import com.hoonjin.study.spring.splearn.domain.AbstractEntity;
-import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -19,7 +18,6 @@ import static java.util.Objects.requireNonNull;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class MemberDetail extends AbstractEntity {
 
-    @Embedded
     private Profile profile;
 
     private String introduction;

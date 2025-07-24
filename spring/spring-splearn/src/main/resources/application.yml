@@ -4,6 +4,7 @@ spring:
   docker:
     compose:
       file: ./spring/spring-splearn/compose.yaml
+      lifecycle-management: start_only
   jpa:
     show-sql: true
     open-in-view: false

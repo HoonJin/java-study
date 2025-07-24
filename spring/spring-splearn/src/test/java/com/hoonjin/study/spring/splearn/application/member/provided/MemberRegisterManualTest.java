@@ -4,6 +4,7 @@ import com.hoonjin.study.spring.splearn.application.member.MemberModifyService;
 import com.hoonjin.study.spring.splearn.application.member.MemberQueryService;
 import com.hoonjin.study.spring.splearn.application.member.required.EmailSender;
 import com.hoonjin.study.spring.splearn.application.member.required.MemberRepository;
+import com.hoonjin.study.spring.splearn.domain.member.Profile;
 import com.hoonjin.study.spring.splearn.domain.shared.Email;
 import com.hoonjin.study.spring.splearn.domain.member.Member;
 import com.hoonjin.study.spring.splearn.domain.member.MemberFixture;
@@ -93,6 +94,11 @@ class MemberRegisterManualTest {
 
         @Override
         public Optional<Member> findById(Long memberId) {
+            return Optional.empty();
+        }
+
+        @Override
+        public Optional<Member> findByProfile(Profile profile) {
             return Optional.empty();
         }
     }
