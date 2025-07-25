@@ -3,7 +3,7 @@ package com.hoonjin.study.spring.config.autoconfig;
 import com.hoonjin.study.spring.config.ConditionalMyOnClass;
 import com.hoonjin.study.spring.config.MyAutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
+import org.springframework.boot.web.embedded.jetty.JettyServletWebServerFactory;
 import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Condition;
@@ -12,20 +12,20 @@ import org.springframework.core.type.AnnotatedTypeMetadata;
 import org.springframework.util.ClassUtils;
 
 @MyAutoConfiguration
-//@Conditional(TomcatWebServerConfig.TomcatCondition.class)
-@ConditionalMyOnClass("org.apache.catalina.startup.Tomcat")
-public class TomcatWebServerConfig {
+//@Conditional(JettyWebServerConfig.JettyCondition.class)
+@ConditionalMyOnClass("org.eclipse.jetty.server.Server")
+public class JettyWebServerConfig {
 
-    @Bean("tomcatWebServerFactory")
+    @Bean
     @ConditionalOnMissingBean
-    public ServletWebServerFactory servletWebServerFactory() {
-        return new TomcatServletWebServerFactory();
+    public ServletWebServerFactory jettyWebServerFactory() {
+        return new JettyServletWebServerFactory();
     }
 
-    static class TomcatCondition implements Condition {
+    static class JettyCondition implements Condition {
         @Override
         public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) {
-            String className = "org.apache.catalina.startup.Tomcat";
+            String className = "org.eclipse.jetty.server.Server";
             return ClassUtils.isPresent(className, context.getClassLoader());
         }
     }

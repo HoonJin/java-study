@@ -1,2 +1,3 @@
 com.hoonjin.study.spring.config.autoconfig.DispatcherServletConfig
 com.hoonjin.study.spring.config.autoconfig.TomcatWebServerConfig
+com.hoonjin.study.spring.config.autoconfig.JettyWebServerConfig
