@@ -7,7 +7,7 @@ spring:
       lifecycle-management: start_only
   jpa:
     show-sql: true
-    open-in-view: false
+#    open-in-view: false # 추후에 끌 것
     properties:
       hibernate:
         format_sql: true
