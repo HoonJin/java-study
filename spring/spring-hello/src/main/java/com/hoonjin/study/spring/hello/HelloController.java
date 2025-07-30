@@ -31,4 +31,9 @@ public class HelloController implements ApplicationContextAware {
         System.out.println("applicationContext = " + applicationContext);
         this.applicationContext = applicationContext;
     }
+
+    @GetMapping("/count")
+    public String count(String name) {
+        return name + ": " + helloService.countOf(name);
+    }
 }

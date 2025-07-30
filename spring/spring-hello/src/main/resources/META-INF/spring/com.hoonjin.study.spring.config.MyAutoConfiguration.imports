@@ -1,3 +1,4 @@
+com.hoonjin.study.spring.config.autoconfig.DataSourceConfig
 com.hoonjin.study.spring.config.autoconfig.PropertyPostProcessorConfig
 com.hoonjin.study.spring.config.autoconfig.PropertyPlaceholderConfig
 com.hoonjin.study.spring.config.autoconfig.DispatcherServletConfig

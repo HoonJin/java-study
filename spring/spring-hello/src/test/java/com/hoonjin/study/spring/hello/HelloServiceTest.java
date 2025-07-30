@@ -1,6 +1,7 @@
 package com.hoonjin.study.spring.hello;
 
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -25,7 +26,7 @@ class HelloServiceTest {
 
     @Test
     void simpleHelloService() {
-        SimpleHelloService helloService = new SimpleHelloService();
+        SimpleHelloService helloService = new SimpleHelloService(Mockito.mock(HelloRepository.class));
 
         String result = helloService.sayHello("Test");
 
@@ -35,10 +36,10 @@ class HelloServiceTest {
 
     @Test
     void helloDecorator() {
-        HelloDecorator decorator = new HelloDecorator(name -> name);
+        HelloDecorator decorator = new HelloDecorator(new SimpleHelloService(Mockito.mock(HelloRepository.class)));
         String result = decorator.sayHello("Test");
         assertThat(result)
-            .isEqualTo("*Test*");
+            .isEqualTo("*Hello Test*");
     }
 
 }
