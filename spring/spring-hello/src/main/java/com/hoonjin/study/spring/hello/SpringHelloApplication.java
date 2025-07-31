@@ -1,12 +1,12 @@
 package com.hoonjin.study.spring.hello;
 
-import com.hoonjin.study.spring.config.MySpringBootApplication;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-@MySpringBootApplication
+@SpringBootApplication
 @RequiredArgsConstructor
 public class SpringHelloApplication {
 

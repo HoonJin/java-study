@@ -25,7 +25,6 @@ public class HelloRepositoryJdbc implements HelloRepository {
     public void increaseCount(String name) {
         Hello hello = findHello(name);
         if (hello == null) {
-            System.out.println("name = " + name);
             jdbcTemplate.update("INSERT INTO hello (name, count) VALUES (?, ?)", name, 1);
         } else {
             jdbcTemplate.update("UPDATE hello SET count = count + 1 where name = '" + name + "'");
