@@ -1,7 +1,7 @@
 package com.hoonjin.study.java.lambda;
 
 @FunctionalInterface
-public interface Procedure {
+public interface MyFunction {
 
-    void run();
+    int apply(int a, int b);
 }
