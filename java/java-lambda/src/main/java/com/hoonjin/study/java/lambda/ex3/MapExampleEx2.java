@@ -1,17 +1,17 @@
-package com.hoonjin.study.java.lambda.ex1;
+package com.hoonjin.study.java.lambda.ex3;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.UnaryOperator;
 
-public class MapExample {
+public class MapExampleEx2 {
 
-    static List<String> map(List<String> list, StringFunction function) {
+    static List<String> map(List<String> list, UnaryOperator<String> function) {
         ArrayList<String> result = new ArrayList<>();
         for (String s : list) {
             result.add(function.apply(s));
         }
         return result;
-//        return list.stream().map(function::apply).toList();
     }
 
     public static void main(String[] args) {
@@ -26,9 +26,4 @@ public class MapExample {
         System.out.println("decorated = " + decorated);
     }
 
-    @FunctionalInterface
-    interface StringFunction {
-
-        String apply(String s);
-    }
 }

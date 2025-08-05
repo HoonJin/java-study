@@ -1,4 +1,4 @@
-package com.hoonjin.study.java.lambda.ex1;
+package com.hoonjin.study.java.lambda.ex2;
 
 import java.util.ArrayList;
 import java.util.List;

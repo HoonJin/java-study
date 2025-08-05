@@ -1,4 +1,4 @@
-package com.hoonjin.study.java.lambda.ex1;
+package com.hoonjin.study.java.lambda.ex2;
 
 @FunctionalInterface
 public interface MyPredicate {
