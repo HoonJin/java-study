@@ -1,0 +1,18 @@
+package com.hoonjin.study.java.lambda.lambda5.map;
+
+import java.util.List;
+
+public class MapMainV4 {
+
+    public static void main(String[] args) {
+        List<String> list = List.of("1", "12", "123", "1234");
+
+        List<Integer> integerResult = StringToIntegerMapper.map(list, s -> Integer.valueOf(s));
+        System.out.println("integerResult = " + integerResult);
+
+        List<Integer> lengthResult = StringToIntegerMapper.map(list, s -> s.length());
+        System.out.println("lengthResult = " + lengthResult);
+    }
+
+
+}
