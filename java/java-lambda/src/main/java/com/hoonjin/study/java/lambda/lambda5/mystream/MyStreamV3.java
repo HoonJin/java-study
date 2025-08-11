@@ -45,4 +45,8 @@ public class MyStreamV3<T> {
             consumer.accept(i);
         }
     }
+
+    public T getFirst() {
+        return internals.getFirst();
+    }
 }
