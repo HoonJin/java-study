@@ -1,8 +1,7 @@
 package com.hoonjin.study.spring.grpc.server;
 
 import io.grpc.stub.StreamObserver;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.grpc.server.service.GrpcService;
 
 import java.time.LocalDateTime;
@@ -14,9 +13,8 @@ import java.util.concurrent.atomic.AtomicLong;
 import static com.hoonjin.study.spring.grpc.server.UserProto.*;
 
 @GrpcService
+@Slf4j
 public class UserGrpcService extends UserServiceGrpc.UserServiceImplBase {
-    
-    private static final Logger logger = LoggerFactory.getLogger(UserGrpcService.class);
     
     // 간단한 인메모리 저장소
     private final Map<Long, UserResponse> users = new HashMap<>();
@@ -41,7 +39,7 @@ public class UserGrpcService extends UserServiceGrpc.UserServiceImplBase {
     
     @Override
     public void getUser(GetUserRequest request, StreamObserver<UserResponse> responseObserver) {
-        logger.info("GetUser 요청: ID {}", request.getId());
+        log.info("GetUser 요청: ID {}", request.getId());
         
         UserResponse user = users.get(request.getId());
         
@@ -62,7 +60,7 @@ public class UserGrpcService extends UserServiceGrpc.UserServiceImplBase {
     
     @Override
     public void createUser(CreateUserRequest request, StreamObserver<UserResponse> responseObserver) {
-        logger.info("CreateUser 요청: 이름 {}, 이메일 {}", request.getName(), request.getEmail());
+        log.info("CreateUser 요청: 이름 {}, 이메일 {}", request.getName(), request.getEmail());
         
         long newId = idGenerator.getAndIncrement();
         
@@ -81,7 +79,7 @@ public class UserGrpcService extends UserServiceGrpc.UserServiceImplBase {
     
     @Override
     public void getUsersStream(GetUsersRequest request, StreamObserver<UserResponse> responseObserver) {
-        logger.info("GetUsersStream 요청: 페이지 {}, 사이즈 {}", request.getPage(), request.getSize());
+        log.info("GetUsersStream 요청: 페이지 {}, 사이즈 {}", request.getPage(), request.getSize());
         
         // 스트리밍으로 사용자 목록 전송
         users.values().forEach(user -> {
@@ -89,7 +87,7 @@ public class UserGrpcService extends UserServiceGrpc.UserServiceImplBase {
                 // 스트리밍 효과를 위해 잠시 대기
                 Thread.sleep(500);
                 responseObserver.onNext(user);
-                logger.info("사용자 전송: {}", user.getName());
+                log.info("사용자 전송: {}", user.getName());
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
                 responseObserver.onError(e);
