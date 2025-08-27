@@ -1,0 +1,20 @@
+
+buildscript {
+    ext {
+        set('springGrpcVersion', "0.10.0")
+    }
+}
+
+plugins {
+    id 'com.google.protobuf' version '0.9.4'
+}
+
+subprojects {
+    apply plugin: 'com.google.protobuf'
+
+    dependencyManagement {
+        imports {
+            mavenBom "org.springframework.grpc:spring-grpc-dependencies:${springGrpcVersion}"
+        }
+    }
+}

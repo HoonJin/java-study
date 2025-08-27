@@ -1,9 +1,11 @@
 syntax = "proto3";
 
-option java_package = "com.hoonjin.study.spring.grpc.server";
-option java_outer_classname = "UserProto";
+option java_package = "com.hoonjin.study.spring.grpc.proto.user";
+option java_multiple_files = true;
 
-package user;
+//option java_outer_classname = "user";
+
+package user.v1;
 
 service UserService {
   rpc GetUser(GetUserRequest) returns (UserResponse);
