@@ -1,12 +1,13 @@
 package com.hoonjin.study.spring.grpc.client;
 
+import com.hoonjin.study.spring.grpc.proto.user.CreateUserRequest;
+import com.hoonjin.study.spring.grpc.proto.user.GetUserRequest;
+import com.hoonjin.study.spring.grpc.proto.user.UserResponse;
+import com.hoonjin.study.spring.grpc.proto.user.UserServiceGrpc;
 import io.grpc.Channel;
 import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-
-import static com.hoonjin.study.spring.grpc.client.UserProto.GetUserRequest;
-import static com.hoonjin.study.spring.grpc.client.UserProto.UserResponse;
 
 @Component
 @Slf4j
@@ -26,7 +27,7 @@ public class GrpcUserClient {
     }
 
     private UserResponse createUser(String name, String email) {
-        UserProto.CreateUserRequest createRequest = UserProto.CreateUserRequest.newBuilder()
+        CreateUserRequest createRequest = CreateUserRequest.newBuilder()
             .setName(name)
             .setEmail(email)
             .build();

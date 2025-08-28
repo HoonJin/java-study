@@ -1,5 +1,8 @@
 package com.hoonjin.study.spring.grpc.client;
 
+import com.hoonjin.study.spring.grpc.proto.user.GetUsersRequest;
+import com.hoonjin.study.spring.grpc.proto.user.UserResponse;
+import com.hoonjin.study.spring.grpc.proto.user.UserServiceGrpc;
 import io.grpc.Channel;
 import io.grpc.stub.StreamObserver;
 import jakarta.annotation.PostConstruct;
@@ -22,14 +25,14 @@ public class AsyncUserClient {
     public void getUserStream(int page, int size) throws InterruptedException {
         CountDownLatch latch = new CountDownLatch(1);
 
-        UserProto.GetUsersRequest getUsersRequest = UserProto.GetUsersRequest.newBuilder()
+        GetUsersRequest getUsersRequest = GetUsersRequest.newBuilder()
             .setPage(page)
             .setSize(size)
             .build();
 
         asyncStub.getUsersStream(getUsersRequest, new StreamObserver<>() {
             @Override
-            public void onNext(UserProto.UserResponse user) {
+            public void onNext(UserResponse user) {
                 log.info("스트림으로 받은 사용자: ID {}, 이름 {}, 이메일 {}",
                     user.getId(), user.getName(), user.getEmail());
             }
