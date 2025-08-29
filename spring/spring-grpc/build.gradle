@@ -17,4 +17,13 @@ subprojects {
             mavenBom "org.springframework.grpc:spring-grpc-dependencies:${springGrpcVersion}"
         }
     }
+
+    dependencies {
+        implementation 'io.grpc:grpc-services'
+        implementation 'org.springframework.grpc:spring-grpc-spring-boot-starter'
+
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+        testImplementation 'org.springframework.grpc:spring-grpc-test'
+    }
+
 }

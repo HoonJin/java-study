@@ -17,7 +17,7 @@ public class UserGrpcService extends UserServiceGrpc.UserServiceImplBase {
 
     // 간단한 인메모리 저장소
     private final Map<Long, UserResponse> users = new HashMap<>();
-    private final AtomicLong idGenerator = new AtomicLong(1);
+    private final AtomicLong idGenerator = new AtomicLong(3);
 
     public UserGrpcService() {
         // 초기 데이터 추가
