@@ -1,0 +1,11 @@
+bootJar.enabled = true
+jar.enabled = false
+
+dependencies {
+    implementation(project(":kotlin:kotlin-commerce:core:core-enum"))
+    implementation(project(":kotlin:kotlin-commerce:support:monitoring"))
+    implementation(project(":kotlin:kotlin-commerce:support:logging"))
+    implementation(project(":kotlin:kotlin-commerce:storage:db-core"))
+
+    implementation("org.springframework.boot:spring-boot-starter-web")
+}

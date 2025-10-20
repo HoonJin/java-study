@@ -1,0 +1,1 @@
+[제미니의 개발실무 - 커머스 백엔드 기본편](https://www.inflearn.com/course/%EC%A0%9C%EB%AF%B8%EB%8B%88%EC%9D%98-%EA%B0%9C%EB%B0%9C%EC%8B%A4%EB%AC%B4-%EC%BB%A4%EB%A8%B8%EC%8A%A4-%EB%B0%B1%EC%97%94%EB%93%9C-%EA%B8%B0%EB%B3%B8/dashboard)
